@@ -1,6 +1,8 @@
 { config, pkgs, ... }:
 
 {
+  nixpkgs.config.allowUnfreePredicate = pkg: true; # Allow home-manager to install unfree packages
+
   imports = [
     ./home
   ];
@@ -33,7 +35,6 @@
     firefox
     libqalculate
     lf
-    neovim
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage

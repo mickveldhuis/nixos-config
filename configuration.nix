@@ -82,7 +82,7 @@
   
   # Set appropriate monitor resolution
   services.xserver.displayManager.setupCommands = ''
-    xrandr --output Virtual-1 --mode 1920x1080
+    ${pkgs.xorg.xrandr}/bin/xrandr --output Virtual-1 --mode 1920x1080
   '';
   
   # Enable compositing for dwm with picom

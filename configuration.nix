@@ -14,8 +14,14 @@
     ];
 
   # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  #boot.loader.systemd-boot.enable = true;
+  #boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader.grub = {
+    enable = true;
+    device = "/dev/sda";
+    useOSProber = true;
+  };  
+
 
   networking.hostName = "nix"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -70,10 +76,10 @@
       sha256 = "sha256-wrTVwKLXntAZAvGivvgXtMEXb+AXN0X6GsvoaA5v09c=";
     };
     patches = [
-    (pkgs.fetchpatch {
-      url = "https://dwm.suckless.org/patches/attachaside/dwm-attachaside-6.4.diff";
-      hash = "sha256-590VHm9Usla+o16m1nZ/JWPSK0ixBsT/DGWBOji+89k=";
-    })
+    # (pkgs.fetchpatch {
+    #   url = "https://dwm.suckless.org/patches/attachaside/dwm-attachaside-6.4.diff";
+    #   hash = "sha256-590VHm9Usla+o16m1nZ/JWPSK0ixBsT/DGWBOji+89k=";
+    # })
   ];
   });
   

@@ -55,38 +55,6 @@
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
 
-  # Enable the DWM Window Manager & Fetch source repo from GitHub
-  services.xserver.windowManager.dwm.enable = true;
-  
-  services.xserver.windowManager.dwm.package = pkgs.dwm.overrideAttrs (oldAttrs: rec {
-    src = pkgs.fetchFromGitHub {
-      owner = "mickveldhuis";
-      repo = "dwm";
-      rev = "f087225bc585c902163d5e4ffa58b83394b49d53";
-      sha256 = "sha256-wrTVwKLXntAZAvGivvgXtMEXb+AXN0X6GsvoaA5v09c=";
-    };
-    patches = [
-    (pkgs.fetchpatch {
-      url = "https://dwm.suckless.org/patches/attachaside/dwm-attachaside-6.4.diff";
-      hash = "sha256-KUIO0oVxQs+RqRAXaEcHJWtG2b0OtWrgMWn0+m+1r78=";
-    })
-  ];
-  });
-  
-  # Start dwm status bar
-  services.xserver.displayManager.sessionCommands = ''slstatus &'';
-  
-  # Set appropriate monitor resolution
-  services.xserver.displayManager.setupCommands = ''
-    ${pkgs.xorg.xrandr}/bin/xrandr --output Virtual-1 --mode 1920x1080
-  '';
-  
-  # Enable compositing for dwm with picom
-  services.picom = {
-    enable = true;
-    settings = {};
-  };
-
   # Configure keymap in X11
   services.xserver = {
     layout = "us";

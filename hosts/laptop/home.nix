@@ -4,7 +4,7 @@
   nixpkgs.config.allowUnfreePredicate = pkg: true; # Allow home-manager to install unfree packages
 
   imports = [
-    ./home
+    ../../home
   ];
 
   xdg = {

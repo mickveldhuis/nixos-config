@@ -10,7 +10,7 @@
       ./hardware-configuration.nix
       
       # Include system level configuration files
-      ./system
+      ../../system
     ];
 
   # Bootloader.

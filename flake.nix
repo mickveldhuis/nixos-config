@@ -21,12 +21,12 @@
       mick = lib.nixosSystem {
         inherit system;
         modules = [ 
-	  ./configuration.nix
+	  ./hosts/laptop/configuration.nix
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users.mick = import ./home.nix;
+            home-manager.users.mick = import ./hosts/laptop/home.nix;
           }
         ];
       };
@@ -34,7 +34,7 @@
     homeConfigurations = {
       mick = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
-        modules = [ ./home.nix ];
+        modules = [ ./hosts/laptop/home.nix ];
       };
     };
   };

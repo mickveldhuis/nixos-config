@@ -51,10 +51,6 @@
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
-  # Enable the LXQT Desktop Environment.
-  #services.xserver.displayManager.lightdm.enable = true;
-  #services.xserver.desktopManager.lxqt.enable = true;
-
   # Enable the Gnome Desktop Enviroment
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
@@ -72,7 +68,7 @@
     patches = [
     (pkgs.fetchpatch {
       url = "https://dwm.suckless.org/patches/attachaside/dwm-attachaside-6.4.diff";
-      hash = "sha256-590VHm9Usla+o16m1nZ/JWPSK0ixBsT/DGWBOji+89k=";
+      hash = "sha256-KUIO0oVxQs+RqRAXaEcHJWtG2b0OtWrgMWn0+m+1r78=";
     })
   ];
   });

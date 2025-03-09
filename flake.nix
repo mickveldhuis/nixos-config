@@ -33,7 +33,7 @@
       desktop = lib.nixosSystem {
         inherit system;
         modules = [ 
-	  ./hosts/laptop/configuration.nix
+	  ./hosts/desktop/configuration.nix
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
@@ -42,7 +42,6 @@
           }
         ];
       };
-
     };
     homeConfigurations = {
       laptop = home-manager.lib.homeManagerConfiguration {

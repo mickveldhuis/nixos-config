@@ -2,6 +2,8 @@
 
 ## Usage
 
+Ensure that flakes are enables on a bare system! Refer to the [NixOS wiki entry on Flakes](https://nixos.wiki/wiki/Flakes).
+
 Make sure `flake.lock` is up-to-date with:
 ```
 nix flake update

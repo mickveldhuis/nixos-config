@@ -8,16 +8,26 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      
-      # Include system level configuration files
+
+      # Include system level configuration files.
       ../../system
     ];
 
   # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader = {
+    efi = {
+      canTouchEfiVariables = true;
+    };
+    grub = {
+      enable = true;
+      useOSProber = true;
+      efiSupport = true;
+      devices = [ "nodev" ];
+    };
+    systemd-boot.enable = false;
+  };
 
-  networking.hostName = "nix"; # Define your hostname.
+  networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -26,9 +36,6 @@
 
   # Enable networking
   networking.networkmanager.enable = true;
-
-  # Enable network manager applet
-  programs.nm-applet.enable = true;
 
   # Set your time zone.
   time.timeZone = "Europe/Amsterdam";
@@ -51,7 +58,7 @@
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
-  # Enable the Gnome Desktop Enviroment
+  # Enable the GNOME Desktop Environment.
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
 
@@ -60,8 +67,8 @@
     layout = "us";
     variant = "";
   };
- 
-  # Setting ZSH to be the default shell
+  
+  # Set ZSH to be the default system-wide shell.
   environment.shells = with pkgs; [ zsh ];
   users.defaultUserShell = pkgs.zsh;
   programs.zsh.enable = true;
@@ -91,43 +98,25 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.mick = {
     isNormalUser = true;
-    description = "mick";
+    description = "Mick";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
-      # left empty, using home-manager instead..!
+    # Left empty, using home-manager instead..!
     ];
   };
-
-  # Enable automatic login for the user.
-  #services.xserver.displayManager.autoLogin.enable = true;
-  #services.xserver.displayManager.autoLogin.user = "mick";
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
   # List packages installed in system profile. To search, run:
-  # $ nix search PACKAGE_NAME 
+  # $ nix search wget
   environment.systemPackages = with pkgs; [
     vim
     wget
     git
     eza
-    slstatus
-    dmenu
   ];
-  
-  nixpkgs.overlays = [
-    (self: super: {
-      slstatus = super.slstatus.overrideAttrs (oldAttrs: rec {
-        src = pkgs.fetchFromGitHub {
-          owner = "mickveldhuis";
-          repo = "slstatus";
-          rev = "9c0617bfda0b1ee301e945b47c14cee59f9e1519";
-          sha256 = "sha256-+Ljm6+2TDo2kV/VOhVLU+Qo7NNdAzILrbcqNVT90qS8=";
-        };
-      });
-    })
-  ];
+
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
@@ -154,18 +143,17 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "24.11";
-  
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-  nix.settings.allowed-users = [ "mick" ];
-
-  # Enable weekly garbage collection
-  nix.gc = {
-    automatic = true;
-    dates = "weekly";
-    options = "--delete-older-than 1w";
+  nix = {
+    settings = {
+      experimental-features = [ "nix-command" "flakes" ];
+      allowed-users = [ "mick" ];
+      auto-optimise-store = true;
+    };
+    gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 1w";
+    };
   };
-
-  # Optimise storage
-  nix.settings.auto-optimise-store = true;
 }

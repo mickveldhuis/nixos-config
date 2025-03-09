@@ -18,7 +18,7 @@
       pkgs = nixpkgs.legacyPackages.${system};
     in {
     nixosConfigurations = {
-      mick = lib.nixosSystem {
+      laptop = lib.nixosSystem {
         inherit system;
         modules = [ 
 	  ./hosts/laptop/configuration.nix
@@ -30,11 +30,28 @@
           }
         ];
       };
+      desktop = lib.nixosSystem {
+        inherit system;
+        modules = [ 
+	  ./hosts/laptop/configuration.nix
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.mick = import ./hosts/desktop/home.nix;
+          }
+        ];
+      };
+
     };
     homeConfigurations = {
-      mick = home-manager.lib.homeManagerConfiguration {
+      laptop = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         modules = [ ./hosts/laptop/home.nix ];
+      };
+      desktop = home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
+        modules = [ ./hosts/desktop/home.nix ];
       };
     };
   };

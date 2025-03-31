@@ -1,6 +1,10 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
+# --------------------------------------------------------------------- #
+#                       LAPTOP NIXOS CONFIGURATION                      #
+# --------------------------------------------------------------------- #
+# Edit this configuration file to define what should be installed on    #
+# your system.  Help is available in the configuration.nix(5) man page  #
+# and in the NixOS manual (accessible by running ‘nixos-help’).         #
+# --------------------------------------------------------------------- #
 
 { config, pkgs, ... }:
 
@@ -11,6 +15,7 @@
       
       # Include system level configuration files
       ../../system
+      ../../system/desktops/gnome.nix
     ];
 
   networking.hostName = "nix"; # Define your hostname.
@@ -21,19 +26,6 @@
 
   # Enable network manager applet
   programs.nm-applet.enable = true;
-
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
-
-  # Enable the Gnome Desktop Enviroment
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
-
-  # Configure keymap in X11
-  services.xserver.xkb = {
-    layout = "us";
-    variant = "";
-  };
  
   # Setting ZSH to be the default shell
   environment.shells = with pkgs; [ zsh ];

@@ -1,11 +1,8 @@
 { config, pkgs, ... }:
 
 {
-  home.packages = with pkgs; [
-    #neovim
-    #vscode-fhs
-  ];
-   
+  home.packages = with pkgs; [ ];
+
   programs.neovim = {
     enable = true;
     viAlias = true;
@@ -31,7 +28,6 @@
     ];
     userSettings = {
       "window.titleBarStyle" = "custom";
-#      "editor.fontFamily" = "'Fira Code', 'monospace', monospace";
       "editor.fontFamily" = "Fira Code";
       "editor.fontLigatures" = true;
       "editor.fontSize" = 15;

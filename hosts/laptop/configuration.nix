@@ -1,6 +1,10 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
+# --------------------------------------------------------------------- #
+#                       LAPTOP NIXOS CONFIGURATION                      #
+# --------------------------------------------------------------------- #
+# Edit this configuration file to define what should be installed on    #
+# your system.  Help is available in the configuration.nix(5) man page  #
+# and in the NixOS manual (accessible by running ‘nixos-help’).         #
+# --------------------------------------------------------------------- #
 
 { config, pkgs, ... }:
 
@@ -10,92 +14,18 @@
       ./hardware-configuration.nix
       
       # Include system level configuration files
-      ./system
+      ../../system
+      ../../system/desktops/gnome.nix
     ];
-
-  # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = "nix"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
   # Enable networking
   networking.networkmanager.enable = true;
 
   # Enable network manager applet
   programs.nm-applet.enable = true;
-
-  # Set your time zone.
-  time.timeZone = "Europe/Amsterdam";
-
-  # Select internationalisation properties.
-  i18n.defaultLocale = "en_US.UTF-8";
-
-  i18n.extraLocaleSettings = {
-    LC_ADDRESS = "nl_NL.UTF-8";
-    LC_IDENTIFICATION = "nl_NL.UTF-8";
-    LC_MEASUREMENT = "nl_NL.UTF-8";
-    LC_MONETARY = "nl_NL.UTF-8";
-    LC_NAME = "nl_NL.UTF-8";
-    LC_NUMERIC = "nl_NL.UTF-8";
-    LC_PAPER = "nl_NL.UTF-8";
-    LC_TELEPHONE = "nl_NL.UTF-8";
-    LC_TIME = "nl_NL.UTF-8";
-  };
-
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
-
-  # Enable the LXQT Desktop Environment.
-  #services.xserver.displayManager.lightdm.enable = true;
-  #services.xserver.desktopManager.lxqt.enable = true;
-
-  # Enable the Gnome Desktop Enviroment
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
-
-  # Enable the DWM Window Manager & Fetch source repo from GitHub
-  services.xserver.windowManager.dwm.enable = true;
-  
-  services.xserver.windowManager.dwm.package = pkgs.dwm.overrideAttrs (oldAttrs: rec {
-    src = pkgs.fetchFromGitHub {
-      owner = "mickveldhuis";
-      repo = "dwm";
-      rev = "f087225bc585c902163d5e4ffa58b83394b49d53";
-      sha256 = "sha256-wrTVwKLXntAZAvGivvgXtMEXb+AXN0X6GsvoaA5v09c=";
-    };
-    patches = [
-    (pkgs.fetchpatch {
-      url = "https://dwm.suckless.org/patches/attachaside/dwm-attachaside-6.4.diff";
-      hash = "sha256-590VHm9Usla+o16m1nZ/JWPSK0ixBsT/DGWBOji+89k=";
-    })
-  ];
-  });
-  
-  # Start dwm status bar
-  services.xserver.displayManager.sessionCommands = ''slstatus &'';
-  
-  # Set appropriate monitor resolution
-  services.xserver.displayManager.setupCommands = ''
-    ${pkgs.xorg.xrandr}/bin/xrandr --output Virtual-1 --mode 1920x1080
-  '';
-  
-  # Enable compositing for dwm with picom
-  services.picom = {
-    enable = true;
-    settings = {};
-  };
-
-  # Configure keymap in X11
-  services.xserver = {
-    layout = "us";
-    xkbVariant = "";
-  };
  
   # Setting ZSH to be the default shell
   environment.shells = with pkgs; [ zsh ];
@@ -106,7 +36,6 @@
   services.printing.enable = true;
 
   # Enable sound with pipewire.
-  sound.enable = true;
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
@@ -190,7 +119,7 @@
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "23.11";
+  system.stateVersion = "24.11";
   
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 

@@ -1,7 +1,10 @@
 { config, pkgs, ... }:
 
 {
-  home.packages = with pkgs; [ ];
+  home.packages = with pkgs; [
+    gnuradio
+    gr-osmosdr
+  ];
 
   programs.neovim = {
     enable = true;

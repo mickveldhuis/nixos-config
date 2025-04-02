@@ -17,6 +17,7 @@
       ../../system
       ../../system/environments/gnome
       ../../system/applications/games
+      ../../system/applications/development
     ];
 
   networking.hostName = "nixos"; # Define your hostname.
@@ -32,13 +33,7 @@
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
-
-  # Enable support for Bluetooth devices
-  hardware.bluetooth = {
-    enable = true;
-    powerOnBoot = true;
-  };
-
+  
   # Enable ratbagd service for piper (mouse customisation)
   services.ratbagd.enable = true;
 

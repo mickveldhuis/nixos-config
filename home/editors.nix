@@ -3,6 +3,7 @@
 {
   home.packages = with pkgs; [
     gnuradio
+    sdrpp
   ];
 
   programs.neovim = {

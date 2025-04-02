@@ -15,8 +15,8 @@
 
       # Include system level configuration files.
       ../../system
+      ../../system/environments/gnome
       ../../system/applications/steam.nix
-      ../../system/desktops/gnome.nix
     ];
 
   networking.hostName = "nixos"; # Define your hostname.
@@ -32,6 +32,9 @@
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
+
+  # Enable ratbagd service for piper (mouse customisation)
+  services.ratbagd.enable = true;
 
   # Enable sound with pipewire.
   hardware.pulseaudio.enable = false;
@@ -49,14 +52,14 @@
     #media-session.enable = true;
   };
 
-  # Enable touchpad support (enabled default in most desktopManager).
-  # services.xserver.libinput.enable = true;
-
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.mick = {
     isNormalUser = true;
     description = "Mick";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ 
+      "networkmanager"
+      "wheel"
+    ];
     packages = with pkgs; [
     # Left empty, using home-manager instead..!
     ];

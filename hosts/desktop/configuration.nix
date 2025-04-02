@@ -33,6 +33,9 @@
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
+  # Enable ratbagd service for piper (mouse customisation)
+  services.ratbagd.enable = true;
+
   # Enable sound with pipewire.
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
@@ -59,7 +62,6 @@
     extraGroups = [ 
       "networkmanager"
       "wheel"
-      "libratd"
     ];
     packages = with pkgs; [
     # Left empty, using home-manager instead..!

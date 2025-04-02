@@ -16,7 +16,7 @@
       # Include system level configuration files.
       ../../system
       ../../system/environments/gnome
-      ../../system/applications/steam.nix
+      ../../system/applications/games
     ];
 
   networking.hostName = "nixos"; # Define your hostname.
@@ -32,6 +32,12 @@
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
+
+  # Enable support for Bluetooth devices
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true;
+  };
 
   # Enable ratbagd service for piper (mouse customisation)
   services.ratbagd.enable = true;

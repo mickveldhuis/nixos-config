@@ -79,6 +79,7 @@
     wget
     git
     eza
+    rtl-sdr
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

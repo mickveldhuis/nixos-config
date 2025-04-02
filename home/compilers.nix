@@ -3,7 +3,7 @@
 {
   home.packages = with pkgs; [
     gcc
-    python3-minimal
+    python3
     julia
   ];
 }

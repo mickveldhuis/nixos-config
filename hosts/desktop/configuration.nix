@@ -53,6 +53,8 @@
     #media-session.enable = true;
   };
 
+  hardware.rtl-sdr.enable = true;
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.mick = {
     isNormalUser = true;

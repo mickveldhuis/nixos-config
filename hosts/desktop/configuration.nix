@@ -60,6 +60,7 @@
     extraGroups = [ 
       "networkmanager"
       "wheel"
+      "plugdev"
     ];
     packages = with pkgs; [
     # Left empty, using home-manager instead..!

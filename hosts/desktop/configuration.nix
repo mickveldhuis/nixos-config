@@ -56,7 +56,11 @@
   users.users.mick = {
     isNormalUser = true;
     description = "Mick";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ 
+      "networkmanager"
+      "wheel"
+      "libratd"
+    ];
     packages = with pkgs; [
     # Left empty, using home-manager instead..!
     ];

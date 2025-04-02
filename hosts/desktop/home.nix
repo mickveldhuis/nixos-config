@@ -36,6 +36,7 @@
     libqalculate
     lf
     libreoffice
+    libratbag
     piper
   ];
 

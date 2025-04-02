@@ -3,7 +3,6 @@
 {
   home.packages = with pkgs; [
     gnuradio
-    gr-osmosdr
   ];
 
   programs.neovim = {

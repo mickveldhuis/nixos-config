@@ -17,7 +17,6 @@
       ../../system
       ../../system/environments/gnome
       ../../system/applications/games
-      ../../system/applications/development
     ];
 
   networking.hostName = "nixos"; # Define your hostname.
@@ -53,8 +52,6 @@
     #media-session.enable = true;
   };
 
-  hardware.rtl-sdr.enable = true;
-
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.mick = {
     isNormalUser = true;
@@ -81,6 +78,9 @@
     eza
     rtl-sdr
   ];
+
+  # Ensure RTL-SDR udev rules are enabled
+  hardware.rtl-sdr.enable = true;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

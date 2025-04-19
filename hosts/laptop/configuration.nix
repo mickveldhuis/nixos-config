@@ -15,7 +15,7 @@
       
       # Include system level configuration files
       ../../system
-      ../../system/desktops/gnome.nix
+      ../../system/environments/gnome
     ];
 
   networking.hostName = "nix"; # Define your hostname.
